@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun install *)",
+      "Bash(bun run *)",
+      "Read(//tmp/**)",
+      "Read(//Users/admin/.bun/**)",
+      "Bash(npm -v)",
+      "Bash(npm run *)",
+      "Bash(npx prettier *)",
+      "Bash(npm view *)",
+      "Bash(cd *)",
+      "Bash(node -e \"console.log\\('lightningcss', require\\('./node_modules/lightningcss/package.json'\\).version\\)\")",
+      "Bash(git rm *)",
+      "Bash(npx eslint *)",
+      "Bash(cd /Users/admin/.claude/projects/-Users-admin-Desktop-satyam-mediflow-dashboard/memory/)",
+      "Bash(cat MEMORY.md)",
+      "Bash(node -e 'fetch\\(\"http://localhost:8081/\"\\).then\\(r=>console.log\\(\"8081 ->\",r.status\\)\\).catch\\(\\(\\)=>console.log\\(\"8081 DOWN\"\\)\\)')",
+      "Bash(node -e 'fetch\\(\"http://localhost:8080/\"\\).then\\(r=>console.log\\(\"8080 ->\",r.status\\)\\).catch\\(\\(\\)=>console.log\\(\"8080 DOWN\"\\)\\)')",
+      "Bash(pkill -f \"vite\")",
+      "Bash(node -e 'fetch\\(\"http://localhost:8080/\"\\).then\\(r=>console.log\\(\"8080 still up:\",r.status\\)\\).catch\\(\\(\\)=>console.log\\(\"8080 DOWN ✓\"\\)\\)')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" --max-time 25 https://medysure-backend.onrender.com/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" --max-time 30 https://medysure-backend.onrender.com/api/v1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" --max-time 30 https://medysure-backend.onrender.com/api/v1/auth/me)",
+      "Bash(git check-ignore *)",
+      "Bash(bun --version)",
+      "Bash(npm install *)",
+      "Bash(npm approve-scripts *)",
+      "Bash(npx esbuild *)",
+      "Bash(node -e \"require\\('esbuild'\\)\")",
+      "Bash(VITE_API_BASE_URL=\"https://medysure-backend.onrender.com/api/v1\" npm run *)",
+      "Bash(curl -s --max-time 10 http://127.0.0.1:5173/)",
+      "Bash(curl -s -o /dev/null -w \"auth/me -> %{http_code}\\\\n\" --max-time 30 https://medysure-backend.onrender.com/api/v1/auth/me)",
+      "Bash(curl -s --max-time 10 http://127.0.0.1:5173/ -w \"\\\\n[http %{http_code}, %{size_download} bytes]\\\\n\")",
+      "Read(//Users/admin/Desktop/satyam/MedySure-Backend/**)",
+      "Bash(grep -rln \"cors\" src)",
+      "Bash(grep -iE \"cors|origin|client|frontend|url\" .env .env.example)"
+    ]
+  }
+}
