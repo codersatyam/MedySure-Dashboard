@@ -8,6 +8,9 @@ export const Route = createFileRoute("/app")({
   // Token *validity* is confirmed by `getMe` in AuthProvider, which signs the
   // user out if the session turns out to be stale.
   beforeLoad: () => {
+    // Dev convenience: skip the auth gate so the dashboard is reachable without
+    // signing in. In production builds the gate is enforced as normal.
+    if (import.meta.env.DEV) return;
     if (!getSession()) {
       throw redirect({ to: "/login" });
     }

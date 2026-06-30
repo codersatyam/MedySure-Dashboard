@@ -1,7 +1,7 @@
 import { mockResponse } from "@/lib/api/mock";
-import type { Patient } from "../types";
+import type { CreatePatientInput, Patient } from "../types";
 
-const patients: Patient[] = [
+let patients: Patient[] = [
   {
     id: "p1",
     name: "Anna Cole",
@@ -92,6 +92,37 @@ const patients: Patient[] = [
   },
 ];
 
+/** Next MRN number, derived from the largest existing one so it stays unique. */
+function nextMrn(): string {
+  const max = patients.reduce((m, p) => {
+    const n = Number(p.mrn.replace(/\D/g, ""));
+    return Number.isNaN(n) ? m : Math.max(m, n);
+  }, 10230);
+  return `MRN-${max + 1}`;
+}
+
+function today(): string {
+  return new Date().toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 export const patientsApi = {
   list: () => mockResponse(patients),
+  /**
+   * In-memory create. MRN and lastVisit are generated here. When a real backend
+   * lands, swap this for an `apiFetch("/patients", { method: "POST", body })`.
+   */
+  create: (input: CreatePatientInput) => {
+    const patient: Patient = {
+      id: crypto.randomUUID(),
+      mrn: nextMrn(),
+      lastVisit: today(),
+      ...input,
+    };
+    patients = [patient, ...patients];
+    return mockResponse(patient);
+  },
 };

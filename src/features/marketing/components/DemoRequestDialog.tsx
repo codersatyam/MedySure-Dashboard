@@ -93,7 +93,7 @@ export function DemoRequestDialog({ trigger }: { trigger: React.ReactNode }) {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Jane Doe" autoComplete="name" {...field} />
+                    <Input placeholder="Rahul Sharma" autoComplete="name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,7 +109,7 @@ export function DemoRequestDialog({ trigger }: { trigger: React.ReactNode }) {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="jane@clinic.com"
+                      placeholder="rahul@clinic.com"
                       autoComplete="email"
                       {...field}
                     />
