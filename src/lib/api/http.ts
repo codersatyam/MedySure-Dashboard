@@ -64,13 +64,37 @@ export async function apiFetch<T>(path: string, opts: RequestOptions = {}): Prom
       body: body === undefined ? undefined : JSON.stringify(body),
     });
   } catch {
-    throw new ApiError(
-      "Could not reach the backend. Is the MedySure API running?",
-      0,
-      "NETWORK",
-    );
+    throw new ApiError("Could not reach the backend. Is the MedySure API running?", 0, "NETWORK");
   }
 
+  return unwrap<T>(res, path);
+}
+
+/**
+ * POST a `multipart/form-data` body (e.g. file uploads) and unwrap the envelope.
+ * Unlike `apiFetch`, the `Content-Type` is intentionally left unset so the
+ * browser adds the correct multipart boundary.
+ */
+export async function apiUpload<T>(
+  path: string,
+  formData: FormData,
+  accessToken?: string,
+): Promise<T> {
+  const headers: Record<string, string> = {};
+  if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
+
+  let res: Response;
+  try {
+    res = await fetch(`${baseUrl()}${path}`, { method: "POST", headers, body: formData });
+  } catch {
+    throw new ApiError("Could not reach the backend. Is the MedySure API running?", 0, "NETWORK");
+  }
+
+  return unwrap<T>(res, path);
+}
+
+/** Parse a backend response, returning `data` or throwing a shaped `ApiError`. */
+async function unwrap<T>(res: Response, path: string): Promise<T> {
   let envelope: ApiEnvelope<T> | null = null;
   try {
     envelope = (await res.json()) as ApiEnvelope<T>;

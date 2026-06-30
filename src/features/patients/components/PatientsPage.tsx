@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { usePatients } from "../api/patients.queries";
 import type { PatientStatus } from "../types";
+import { AddPatientDialog } from "./AddPatientDialog";
 
 const statusClasses: Record<PatientStatus, string> = {
   Admitted: "bg-info/10 text-info",
@@ -17,6 +18,7 @@ const statusClasses: Record<PatientStatus, string> = {
 export function PatientsPage() {
   const { data: patients, isPending } = usePatients();
   const [query, setQuery] = useState("");
+  const [addOpen, setAddOpen] = useState(false);
 
   const filtered = useMemo(() => {
     if (!patients) return [];
@@ -37,7 +39,10 @@ export function PatientsPage() {
         title="Patients"
         description="Search, monitor, and manage every patient record across your organization."
         actions={
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-medium text-sm shadow-glow hover:bg-primary-glow transition-colors">
+          <button
+            onClick={() => setAddOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-medium text-sm shadow-glow hover:bg-primary-glow transition-colors"
+          >
             <UserPlus className="size-4" /> Add Patient
           </button>
         }
@@ -125,6 +130,8 @@ export function PatientsPage() {
           </div>
         )}
       </SectionCard>
+
+      <AddPatientDialog open={addOpen} onOpenChange={setAddOpen} />
     </div>
   );
 }

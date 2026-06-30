@@ -43,7 +43,7 @@ export const navGroups: NavGroup[] = [
     items: [
       { label: "Dashboard", icon: LayoutDashboard, to: "/app" },
       { label: "Patients", icon: Users, to: "/app/patients", badge: 12 },
-      { label: "Doctors", icon: Stethoscope },
+      { label: "Doctors", icon: Stethoscope, to: "/app/doctors" },
       { label: "Appointments", icon: CalendarDays, to: "/app/appointments", badge: 4 },
       // { label: "Telemedicine", icon: Video },
       // { label: "Medical Records", icon: FileText },
